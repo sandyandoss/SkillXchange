@@ -1,33 +1,28 @@
 import 'package:flutter/material.dart';
-import 'contactInformation_screen.dart';
-// Main screen for entering company information
-class CompanyInformationScreen extends StatefulWidget {
-  const CompanyInformationScreen({super.key});
+import 'package:skillxchange/presentation/screens/applicationList_screen.dart';
+
+class ContactInformationScreen extends StatefulWidget {
+  const ContactInformationScreen({super.key});
 
   @override
-  State<CompanyInformationScreen> createState() =>
-      _CompanyInformationScreenState();
+  State<ContactInformationScreen> createState() =>
+      _ContactInformationScreenState();
 }
 
-class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
-  // Key to identify the form
-  final _formKey = GlobalKey<FormState>();
+class _ContactInformationScreenState extends State<ContactInformationScreen> {
+  // Controllers for text input fields
+  final _contactNameController = TextEditingController();
+  final _contactEmailController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+  final _socialMediaLinkController = TextEditingController();
 
-  // Controllers to manage text input fields
-  final _companyNameController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  final _locationController = TextEditingController();
-  final _industryController = TextEditingController();
-  final _websiteController = TextEditingController();
-
-  // Dispose controllers when the widget is removed from the widget tree
+  // Dispose controllers when the widget is removed
   @override
   void dispose() {
-    _companyNameController.dispose();
-    _descriptionController.dispose();
-    _locationController.dispose();
-    _industryController.dispose();
-    _websiteController.dispose();
+    _contactNameController.dispose();
+    _contactEmailController.dispose();
+    _phoneNumberController.dispose();
+    _socialMediaLinkController.dispose();
     super.dispose();
   }
 
@@ -90,26 +85,21 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 1),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildHeader(), // Display the header
-                    const SizedBox(height: 33), // Add vertical spacing
-                    _buildCompanyNameField(), // Company name input field
-                    const SizedBox(height: 19),
-                    _buildDescriptionField(), // Company description input field
-                    const SizedBox(height: 19),
-                    _buildLocationField(), // Location input field
-                    const SizedBox(height: 19),
-                    _buildCompanyWebsiteField(), // Company website input field
-                    const SizedBox(height: 19),
-                    _buildIndustrySection(), // Industry input field
-                    const SizedBox(height: 100),
-                    _buildNavigationButtons(), // Navigation buttons (Back and Next)
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildHeader(), // Display the header
+                  const SizedBox(height: 33), // Add vertical spacing
+                  _buildContactNameField(), // Contact name input field
+                  const SizedBox(height: 19),
+                  _buildContactEmailField(), // Contact email input field
+                  const SizedBox(height: 19),
+                  _buildPhoneNumberField(), // Phone number input field
+                  const SizedBox(height: 19),
+                  _buildSocialMediaLinkField(), // Social media link input field
+                  const SizedBox(height: 195),
+                  _buildNavigationButtons(), // Navigation buttons (Back and Next)
+                ],
               ),
             ),
           ),
@@ -121,7 +111,7 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
   // Build the header text
   Widget _buildHeader() {
     return Text(
-      'Company Information',
+      'Contact Information',
       style: TextStyle(
         fontWeight: FontWeight.bold, // Set font weight
         fontSize: 20, // Set font size
@@ -130,13 +120,13 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
     );
   }
 
-  // Build the company name input field
-  Widget _buildCompanyNameField() {
+  // Build the contact name input field
+  Widget _buildContactNameField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Company Name',
+          'Contact Name',
           style: TextStyle(
             fontWeight: FontWeight.w600, // Set font weight
             color: Colors.black, // Set text color
@@ -144,9 +134,9 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
         ),
         const SizedBox(height: 8), // Add vertical spacing
         TextFormField(
-          controller: _companyNameController,
+          controller: _contactNameController,
           decoration: InputDecoration(
-            hintText: 'Your company name', // Placeholder text
+            hintText: 'Contact name', // Placeholder text
             hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
             contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Set padding
             border: OutlineInputBorder(
@@ -163,13 +153,13 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
     );
   }
 
-  // Build the company description input field
-  Widget _buildDescriptionField() {
+  // Build the contact email input field
+  Widget _buildContactEmailField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Company Description',
+          'Contact Email',
           style: TextStyle(
             fontWeight: FontWeight.w600, // Set font weight
             color: Colors.black, // Set text color
@@ -177,10 +167,9 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
         ),
         const SizedBox(height: 8), // Add vertical spacing
         TextFormField(
-          controller: _descriptionController,
-          maxLines: 1, // Allow only one line of input
+          controller: _contactEmailController,
           decoration: InputDecoration(
-            hintText: 'Details company', // Placeholder text
+            hintText: 'Email', // Placeholder text
             hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
             contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Set padding
             border: OutlineInputBorder(
@@ -197,13 +186,13 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
     );
   }
 
-  // Build the location input field
-  Widget _buildLocationField() {
+  // Build the phone number input field
+  Widget _buildPhoneNumberField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Location',
+          'Phone Number',
           style: TextStyle(
             fontWeight: FontWeight.w600, // Set font weight
             color: Colors.black, // Set text color
@@ -211,9 +200,9 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
         ),
         const SizedBox(height: 8), // Add vertical spacing
         TextFormField(
-          controller: _locationController,
+          controller: _phoneNumberController,
           decoration: InputDecoration(
-            hintText: 'Your location', // Placeholder text
+            hintText: '+961 XX XXXXXX', // Placeholder text
             hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
             contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Set padding
             border: OutlineInputBorder(
@@ -224,25 +213,19 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: Colors.black), // Set focused border color
             ),
-            suffixIcon: IconButton(
-              icon: Icon(Icons.location_on_outlined, color: Colors.grey[700]), // Set icon
-              onPressed: () {
-                // Add functionality for location picker
-              },
-            ),
           ),
         ),
       ],
     );
   }
 
-  // Build the company website input field
-  Widget _buildCompanyWebsiteField() {
+  // Build the social media link input field
+  Widget _buildSocialMediaLinkField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Company Website',
+          'Social Media Link',
           style: TextStyle(
             fontWeight: FontWeight.w600, // Set font weight
             color: Colors.black, // Set text color
@@ -250,7 +233,7 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
         ),
         const SizedBox(height: 8), // Add vertical spacing
         TextFormField(
-          controller: _websiteController,
+          controller: _socialMediaLinkController,
           decoration: InputDecoration(
             hintText: 'https://', // Placeholder text
             hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
@@ -263,38 +246,11 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: Colors.black), // Set focused border color
             ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  // Build the industry input field
-  Widget _buildIndustrySection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Industry',
-          style: TextStyle(
-            fontWeight: FontWeight.w600, // Set font weight
-            color: Colors.black, // Set text color
-          ),
-        ),
-        const SizedBox(height: 8), // Add vertical spacing
-        TextFormField(
-          controller: _industryController,
-          decoration: InputDecoration(
-            hintText: 'Industry', // Placeholder text
-            hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
-            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Set padding
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10), // Set border radius
-              borderSide: BorderSide(color: Colors.grey[300]!), // Set border color
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black), // Set focused border color
+            suffixIcon: IconButton(
+              icon: Icon(Icons.add, color: Colors.grey[700]), // Add a "+" icon
+              onPressed: () {
+                // Add functionality for the "+" button
+              },
             ),
           ),
         ),
@@ -311,7 +267,8 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
         Expanded(
           child: OutlinedButton(
             onPressed: () {
-              // Add functionality for the back button
+              // Navigate back to the previous screen
+              Navigator.pop(context);
             },
             style: OutlinedButton.styleFrom(
               backgroundColor: Colors.white, // Set button background color
@@ -335,7 +292,7 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
         Expanded(
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(context , MaterialPageRoute(builder: (context)=>ContactInformationScreen(),
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> ApplicationlistScreen()
               ),
               );
             },
