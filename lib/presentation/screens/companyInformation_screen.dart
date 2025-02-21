@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Main screen for entering company information
 class CompanyInformationScreen extends StatefulWidget {
   const CompanyInformationScreen({super.key});
 
@@ -9,66 +10,70 @@ class CompanyInformationScreen extends StatefulWidget {
 }
 
 class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
+  // Key to identify the form
   final _formKey = GlobalKey<FormState>();
+
+  // Controllers to manage text input fields
   final _companyNameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _locationController = TextEditingController();
   final _industryController = TextEditingController();
-  final _websiteController = TextEditingController(); // New controller for website
+  final _websiteController = TextEditingController();
 
+  // Dispose controllers when the widget is removed from the widget tree
   @override
   void dispose() {
     _companyNameController.dispose();
     _descriptionController.dispose();
     _locationController.dispose();
     _industryController.dispose();
-    _websiteController.dispose(); // Dispose the website controller
+    _websiteController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Clean white background
+      backgroundColor: Colors.white, // Set background color to white
       body: Column(
         children: [
-          // Logo and buttons at the top
+          // Top section with logo and skip button
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Bigger logo
+                  // Display the company logo
                   Container(
-                    width: 160, // Increased width for bigger logo
-                    height: 70, // Increased height for bigger logo
+                    width: 160, // Set width of the logo
+                    height: 70, // Set height of the logo
                     child: Image.asset(
                       'assets/images/logo.jpeg',
-                      fit: BoxFit.contain, // Ensures the logo fits within the container
+                      fit: BoxFit.contain, // Ensure the logo fits within the container
                     ),
                   ),
 
-                  // Combined Skip and arrow button
+                  // Skip button with an arrow icon
                   TextButton(
                     onPressed: () {
-                      // Add functionality for the combined button
+                      // Add functionality for the skip button
                     },
                     child: Row(
                       children: [
                         Text(
                           'Skip',
                           style: TextStyle(
-                            color: Colors.grey, // Darker skip text
+                            color: Colors.grey, // Set text color
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
                           ),
                         ),
-                        const SizedBox(width: 4), // Space between text and arrow
+                        const SizedBox(width: 4), // Add space between text and icon
                         Text(
                           '￫',
                           style: TextStyle(
-                            color: Colors.grey, // Arrow color
+                            color: Colors.grey, // Set icon color
                             fontWeight: FontWeight.bold,
                             fontSize: 23,
                           ),
@@ -81,7 +86,7 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
             ),
           ),
 
-          // Rest of the body
+          // Main content of the screen
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 1),
@@ -90,19 +95,19 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildHeader(),
-                    const SizedBox(height: 33),
-                    _buildCompanyNameField(),
+                    _buildHeader(), // Display the header
+                    const SizedBox(height: 33), // Add vertical spacing
+                    _buildCompanyNameField(), // Company name input field
                     const SizedBox(height: 19),
-                    _buildDescriptionField(),
+                    _buildDescriptionField(), // Company description input field
                     const SizedBox(height: 19),
-                    _buildLocationField(),
+                    _buildLocationField(), // Location input field
                     const SizedBox(height: 19),
-                    _buildCompanyWebsiteField(), // New Company Website field
+                    _buildCompanyWebsiteField(), // Company website input field
                     const SizedBox(height: 19),
-                    _buildIndustrySection(),
+                    _buildIndustrySection(), // Industry input field
                     const SizedBox(height: 100),
-                    _buildNavigationButtons(),
+                    _buildNavigationButtons(), // Navigation buttons (Back and Next)
                   ],
                 ),
               ),
@@ -113,42 +118,44 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
     );
   }
 
+  // Build the header text
   Widget _buildHeader() {
     return Text(
       'Company Information',
-      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-        fontWeight: FontWeight.w700,
-        fontSize: 20,
-        color: Colors.black,
+      style: TextStyle(
+        fontWeight: FontWeight.bold, // Set font weight
+        fontSize: 20, // Set font size
+        color: Colors.black, // Set text color
       ),
     );
   }
 
+  // Build the company name input field
   Widget _buildCompanyNameField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Company Name',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600, // Semi-bold label
-            color: Colors.black, // Dark grey for labels
+          style: TextStyle(
+            fontWeight: FontWeight.w600, // Set font weight
+            color: Colors.black, // Set text color
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 8), // Add vertical spacing
         TextFormField(
           controller: _companyNameController,
           decoration: InputDecoration(
-            hintText: 'Your company name',
-            hintStyle: TextStyle(color: Colors.grey[500]), // Light grey hint
-            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Smaller padding
+            hintText: 'Your company name', // Placeholder text
+            hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Set padding
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-              borderSide: BorderSide(color: Colors.grey[300]!), // Light grey border
+              borderRadius: BorderRadius.circular(10), // Set border radius
+              borderSide: BorderSide(color: Colors.grey[300]!), // Set border color
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black), // Focused border
+              borderSide: BorderSide(color: Colors.black), // Set focused border color
             ),
           ),
         ),
@@ -156,32 +163,33 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
     );
   }
 
+  // Build the company description input field
   Widget _buildDescriptionField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Company Description',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600, // Semi-bold label
-            color: Colors.black, // Dark grey for labels
+          style: TextStyle(
+            fontWeight: FontWeight.w600, // Set font weight
+            color: Colors.black, // Set text color
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 8), // Add vertical spacing
         TextFormField(
           controller: _descriptionController,
-          maxLines: 1,
+          maxLines: 1, // Allow only one line of input
           decoration: InputDecoration(
-            hintText: 'Details company',
-            hintStyle: TextStyle(color: Colors.grey[500]), // Light grey hint
-            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Smaller padding
+            hintText: 'Details company', // Placeholder text
+            hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Set padding
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-              borderSide: BorderSide(color: Colors.grey[300]!), // Light grey border
+              borderRadius: BorderRadius.circular(10), // Set border radius
+              borderSide: BorderSide(color: Colors.grey[300]!), // Set border color
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black), // Focused border
+              borderSide: BorderSide(color: Colors.black), // Set focused border color
             ),
           ),
         ),
@@ -189,36 +197,37 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
     );
   }
 
+  // Build the location input field
   Widget _buildLocationField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Location',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600, // Semi-bold label
-            color: Colors.black, // Dark grey for labels
+          style: TextStyle(
+            fontWeight: FontWeight.w600, // Set font weight
+            color: Colors.black, // Set text color
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 8), // Add vertical spacing
         TextFormField(
           controller: _locationController,
           decoration: InputDecoration(
-            hintText: 'Your location',
-            hintStyle: TextStyle(color: Colors.grey[500]), // Light grey hint
-            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Smaller padding
+            hintText: 'Your location', // Placeholder text
+            hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Set padding
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-              borderSide: BorderSide(color: Colors.grey[300]!), // Light grey border
+              borderRadius: BorderRadius.circular(10), // Set border radius
+              borderSide: BorderSide(color: Colors.grey[300]!), // Set border color
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black), // Focused border
+              borderSide: BorderSide(color: Colors.black), // Set focused border color
             ),
             suffixIcon: IconButton(
-              icon: Icon(Icons.location_on_outlined, color: Colors.grey[700]),
+              icon: Icon(Icons.location_on_outlined, color: Colors.grey[700]), // Set icon
               onPressed: () {
-                // Implement location picker
+                // Add functionality for location picker
               },
             ),
           ),
@@ -227,31 +236,32 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
     );
   }
 
+  // Build the company website input field
   Widget _buildCompanyWebsiteField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Company Website',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600, // Semi-bold label
-            color: Colors.black, // Dark grey for labels
+          style: TextStyle(
+            fontWeight: FontWeight.w600, // Set font weight
+            color: Colors.black, // Set text color
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 8), // Add vertical spacing
         TextFormField(
           controller: _websiteController,
           decoration: InputDecoration(
-            hintText: 'https://',
-            hintStyle: TextStyle(color: Colors.grey[500]), // Light grey hint
-            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Smaller padding
+            hintText: 'https://', // Placeholder text
+            hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Set padding
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-              borderSide: BorderSide(color: Colors.grey[300]!), // Light grey border
+              borderRadius: BorderRadius.circular(10), // Set border radius
+              borderSide: BorderSide(color: Colors.grey[300]!), // Set border color
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black), // Focused border
+              borderSide: BorderSide(color: Colors.black), // Set focused border color
             ),
           ),
         ),
@@ -259,31 +269,32 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
     );
   }
 
+  // Build the industry input field
   Widget _buildIndustrySection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Industry',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w600, // Semi-bold label
-            color: Colors.black, // Dark grey for labels
+          style: TextStyle(
+            fontWeight: FontWeight.w600, // Set font weight
+            color: Colors.black, // Set text color
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 8), // Add vertical spacing
         TextFormField(
           controller: _industryController,
           decoration: InputDecoration(
-            hintText: 'Industry',
-            hintStyle: TextStyle(color: Colors.grey[500]), // Light grey hint
-            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Smaller padding
+            hintText: 'Industry', // Placeholder text
+            hintStyle: TextStyle(color: Colors.grey[500]), // Set hint text color
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16), // Set padding
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10), // Rounded corners
-              borderSide: BorderSide(color: Colors.grey[300]!), // Light grey border
+              borderRadius: BorderRadius.circular(10), // Set border radius
+              borderSide: BorderSide(color: Colors.grey[300]!), // Set border color
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black), // Focused border
+              borderSide: BorderSide(color: Colors.black), // Set focused border color
             ),
           ),
         ),
@@ -291,49 +302,56 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
     );
   }
 
-
+  // Build the navigation buttons (Back and Next)
   Widget _buildNavigationButtons() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // Back button
         Expanded(
           child: OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Add functionality for the back button
+            },
             style: OutlinedButton.styleFrom(
-              backgroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 12), // Smaller padding
-              side: BorderSide(color: Colors.grey[400]!), // Dark grey border
+              backgroundColor: Colors.white, // Set button background color
+              padding: const EdgeInsets.symmetric(vertical: 12), // Set padding
+              side: BorderSide(color: Colors.grey[400]!), // Set border color
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(7), // Rounded corners
+                borderRadius: BorderRadius.circular(7), // Set border radius
               ),
             ),
             child: Text(
               'Back',
               style: TextStyle(
-                color: Color(0xFF1E225A), // Dark grey text
-                fontWeight: FontWeight.w600,
+                color: Color(0xFF1E225A), // Set text color
+                fontWeight: FontWeight.w600, // Set font weight
               ),
             ),
           ),
-
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 16), // Add horizontal spacing
+        // Next button
         Expanded(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              // Add functionality for the next button
+            },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF1E225A), // Light grey background
-              foregroundColor: Color(0xFF1E225A), // Dark grey text
-              padding: const EdgeInsets.symmetric(vertical: 12), // Smaller padding
+              backgroundColor: Color(0xFF1E225A), // Set button background color
+              foregroundColor: Color(0xFF1E225A), // Set text color
+              padding: const EdgeInsets.symmetric(vertical: 12), // Set padding
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(7), // Rounded corners
+                borderRadius: BorderRadius.circular(7), // Set border radius
               ),
-              elevation: 5, // Subtle shadow
+              elevation: 5, // Set button elevation (shadow)
             ),
-            child: const Text('Next ￫', style: TextStyle(color: Colors.white,),
+            child: const Text(
+              'Next ￫',
+              style: TextStyle(color: Colors.white), // Set text color
+            ),
           ),
         ),
-    )
       ],
     );
   }
