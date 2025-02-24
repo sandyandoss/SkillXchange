@@ -1,8 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skillxchange/presentation/screens/jobDetails_screen.dart';
 
 class Createvacancies2Screen extends StatefulWidget {
-  const Createvacancies2Screen({super.key});
+  final String jobTitle; // Passed from CreatevacanciesScreen
+  final String jobLocation; // Passed from CreatevacanciesScreen
+
+  const Createvacancies2Screen({
+    super.key,
+    required this.jobTitle,
+    required this.jobLocation,
+  });
 
   @override
   State<Createvacancies2Screen> createState() => _Createvacancies2ScreenState();
@@ -157,7 +165,16 @@ class _Createvacancies2ScreenState extends State<Createvacancies2Screen> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                // Add functionality for the Next button
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => JobDetailsScreen(
+                      companyName: _companyDepartmentController.text,
+                      jobTitle: widget.jobTitle, // Use the passed jobTitle
+                      jobLocation: widget.jobLocation, // Use the passed jobLocation
+                    ),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1E225A), // Button color

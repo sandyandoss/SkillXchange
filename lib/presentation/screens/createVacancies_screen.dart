@@ -156,9 +156,16 @@ class _CreatevacanciesScreenState extends State<CreatevacanciesScreen> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => Createvacancies2Screen(),
-                ),);
+                // Navigate to Createvacancies2Screen and pass jobTitle and jobLocation
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Createvacancies2Screen(
+                      jobTitle: _jobTitleController.text, // Pass job title
+                      jobLocation: _jobLocationController.text, // Pass job location
+                    ),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1E225A), // Button color
