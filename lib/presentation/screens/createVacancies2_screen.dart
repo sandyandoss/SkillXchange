@@ -1,33 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'createVacancies2_screen.dart';
-
-class CreatevacanciesScreen extends StatefulWidget {
-  const CreatevacanciesScreen({super.key});
+class Createvacancies2Screen extends StatefulWidget {
+  const Createvacancies2Screen({super.key});
 
   @override
-  State<CreatevacanciesScreen> createState() => _CreatevacanciesScreenState();
+  State<Createvacancies2Screen> createState() => _Createvacancies2ScreenState();
 }
 
-class _CreatevacanciesScreenState extends State<CreatevacanciesScreen> {
+class _Createvacancies2ScreenState extends State<Createvacancies2Screen> {
   // Controllers for text fields
-  final _jobTitleController = TextEditingController();
-  final _jobDescriptionController = TextEditingController();
-  final _jobLocationController = TextEditingController();
-  final _employmentTypeController = TextEditingController();
-  final _experienceLevelController = TextEditingController();
-  final _applicationDeadlineController = TextEditingController();
+  final _addSkillsController = TextEditingController();
+  final _educationalRequirementsController = TextEditingController();
+  final _minSalaryController = TextEditingController(); // For minimum salary
+  final _maxSalaryController = TextEditingController(); // For maximum salary
+  final _benefitsController = TextEditingController();
+  final _companyDepartmentController = TextEditingController();
+  final _reportingManagerController = TextEditingController();
 
   // Dispose controllers when the widget is removed
   @override
   void dispose() {
-    _jobTitleController.dispose();
-    _jobDescriptionController.dispose();
-    _jobLocationController.dispose();
-    _employmentTypeController.dispose();
-    _experienceLevelController.dispose();
-    _applicationDeadlineController.dispose();
+    _addSkillsController.dispose();
+    _educationalRequirementsController.dispose();
+    _minSalaryController.dispose();
+    _maxSalaryController.dispose();
+    _benefitsController.dispose();
+    _companyDepartmentController.dispose();
+    _reportingManagerController.dispose();
     super.dispose();
   }
 
@@ -52,7 +52,7 @@ class _CreatevacanciesScreenState extends State<CreatevacanciesScreen> {
                       color: Colors.black,
                     ),
                     onPressed: () {
-                      // Add a function later
+                      Navigator.pop(context);
                     },
                   ),
                   // Title
@@ -76,74 +76,75 @@ class _CreatevacanciesScreenState extends State<CreatevacanciesScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Job Title
-                  _buildSectionTitle('Job Title'),
+                  // Skills Required
+                  _buildSectionTitle('Skills Required'),
                   const SizedBox(height: 8),
                   _buildTextField(
-                    _jobTitleController,
-                    'e.g., Senior UX Designer',
+                    _addSkillsController,
+                    'Add skills',
+                    icon: Icons.add,
                   ),
                   const SizedBox(height: 24),
 
-                  // Job Description
+                  // Educational Requirements
+                  _buildSectionTitle('Educational Requirements'),
+                  const SizedBox(height: 8),
+                  _buildTextField(
+                    _educationalRequirementsController,
+                    'Education',
+                    icon: Icons.keyboard_arrow_down_rounded,
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Salary Range
+                  _buildSectionTitle('Salary Range'),
+                  const SizedBox(height: 8),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildSectionTitle('Job Description'),
-                      Text(
-                        '${_jobDescriptionController.text.length}/200',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 12,
+                      // Minimum Salary
+                      Expanded(
+                        child: _buildTextField(
+                          _minSalaryController,
+                          '\$ 0',
+                        ),
+                      ),
+                      const SizedBox(width: 16), // Spacing between the two fields
+                      // Maximum Salary
+                      Expanded(
+                        child: _buildTextField(
+                          _maxSalaryController,
+                          '\$ 1000',
                         ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 24),
+
+                  // Benefits
+                  _buildSectionTitle('Benefits'),
                   const SizedBox(height: 8),
                   _buildTextField(
-                    _jobDescriptionController,
-                    'Details Company',
-                    maxLines: 4,
+                    _benefitsController,
+                    'List Benefits',
                   ),
                   const SizedBox(height: 24),
 
-                  // Job Location
-                  _buildSectionTitle('Job Location'),
+                  // Company Department
+                  _buildSectionTitle('Company Department'),
                   const SizedBox(height: 8),
                   _buildTextField(
-                    _jobLocationController,
-                    'Your Locations',
-                    icon: Icons.location_on_outlined,
+                    _companyDepartmentController,
+                    'Select the department',
+                    icon: Icons.keyboard_arrow_down_rounded,
                   ),
                   const SizedBox(height: 24),
 
-                  // Employment Type
-                  _buildSectionTitle('Employment Type'),
+                  // Reporting Manager
+                  _buildSectionTitle('Reporting Manager'),
                   const SizedBox(height: 8),
                   _buildTextField(
-                    _employmentTypeController,
-                    'Employment type',
-                    icon: Icons.business_center_outlined,
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Experience Level
-                  _buildSectionTitle('Experience Level'),
-                  const SizedBox(height: 8),
-                  _buildTextField(
-                    _experienceLevelController,
-                    'Experience Level',
-                    icon: Icons.star_outline,
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Application Deadline
-                  _buildSectionTitle('Application Deadline'),
-                  const SizedBox(height: 8),
-                  _buildTextField(
-                    _applicationDeadlineController,
-                    'Application Deadline',
-                    icon: Icons.calendar_today_outlined,
+                    _reportingManagerController,
+                    'Reporting manager',
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -156,9 +157,7 @@ class _CreatevacanciesScreenState extends State<CreatevacanciesScreen> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => Createvacancies2Screen(),
-                ),);
+                // Add functionality for the Next button
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF1E225A), // Button color
