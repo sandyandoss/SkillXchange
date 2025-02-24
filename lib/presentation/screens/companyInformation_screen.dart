@@ -339,6 +339,7 @@ class _CompanyInformationScreenState extends State<CompanyInformationScreen> {
               ),
               );
             },
+
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF1E225A), // Set button background color
               foregroundColor: Color(0xFF1E225A), // Set text color
